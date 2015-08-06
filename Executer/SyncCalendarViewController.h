@@ -10,4 +10,7 @@
 
 @interface SyncCalendarViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIView *syncCalendarView;
+    
+
 @end
