@@ -14,6 +14,7 @@
 		42C0E43E1B73861700149FD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C0E43D1B73861700149FD0 /* Images.xcassets */; };
 		42C0E4411B73861700149FD0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42C0E43F1B73861700149FD0 /* LaunchScreen.xib */; };
 		42C0E44D1B73861800149FD0 /* ExecuterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0E44C1B73861800149FD0 /* ExecuterTests.m */; };
+		85C93B0B1B73AFEB00679EB9 /* SyncCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C93B0A1B73AFEB00679EB9 /* SyncCalendarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		42C0E4461B73861800149FD0 /* ExecuterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExecuterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C0E44B1B73861800149FD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42C0E44C1B73861800149FD0 /* ExecuterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExecuterTests.m; sourceTree = "<group>"; };
+		85C93B091B73AFEB00679EB9 /* SyncCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncCalendarViewController.h; sourceTree = "<group>"; };
+		85C93B0A1B73AFEB00679EB9 /* SyncCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncCalendarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				42C0E4371B73861700149FD0 /* ViewController.h */,
 				42C0E4381B73861700149FD0 /* ViewController.m */,
 				42C0E43A1B73861700149FD0 /* Main.storyboard */,
+				85C93B091B73AFEB00679EB9 /* SyncCalendarViewController.h */,
+				85C93B0A1B73AFEB00679EB9 /* SyncCalendarViewController.m */,
 				42C0E43D1B73861700149FD0 /* Images.xcassets */,
 				42C0E43F1B73861700149FD0 /* LaunchScreen.xib */,
 				42C0E4301B73861700149FD0 /* Supporting Files */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42C0E4391B73861700149FD0 /* ViewController.m in Sources */,
+				85C93B0B1B73AFEB00679EB9 /* SyncCalendarViewController.m in Sources */,
 				42C0E4361B73861700149FD0 /* AppDelegate.m in Sources */,
 				42C0E4331B73861700149FD0 /* main.m in Sources */,
 			);
@@ -418,6 +424,7 @@
 				42C0E4521B73861800149FD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		42C0E4531B73861800149FD0 /* Build configuration list for PBXNativeTarget "ExecuterTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +433,7 @@
 				42C0E4551B73861800149FD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
