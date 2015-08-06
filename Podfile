@@ -3,6 +3,7 @@
 
 target 'Executer' do
 pod 'googleplus-ios-sdk'
+pod 'AFNetworking'
 end
 
 target 'ExecuterTests' do
