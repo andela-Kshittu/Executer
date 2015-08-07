@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BookRideViewController : UIViewController <UIPopoverPresentationControllerDelegate>
+#import "MenuViewController.h"
+@interface BookRideViewController : UIViewController <UIPopoverPresentationControllerDelegate, menuViewDelegate>
 @property (nonatomic, strong) UIPopoverPresentationController *popController;
 @property (strong, nonatomic) IBOutlet UIView *chooseUberType;
+@property (strong, nonatomic) IBOutlet UILabel *uberTypeLabel;
+@property (strong, nonatomic) IBOutlet UITextField *endTimeTextField;
+@property (strong, nonatomic) IBOutlet UITextField *startTimeTextField;
+@property (strong, nonatomic) IBOutlet UITextField *destinationTextField;
+@property (strong, nonatomic) IBOutlet UITextField *locationTextField;
 @end

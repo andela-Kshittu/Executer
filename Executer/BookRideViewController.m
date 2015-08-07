@@ -27,6 +27,7 @@
 -(void)showUberTypes:(UITapGestureRecognizer *)sender{
     NSLog(@"show uber types");
     MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+    menuViewController.delegate = self;
     menuViewController.modalPresentationStyle = UIModalPresentationPopover;
     menuViewController.preferredContentSize = CGSizeMake(self.view.frame.size.height/4, self.view.frame.size.height/3);
     UIPopoverPresentationController * popController = menuViewController.popoverPresentationController;
@@ -45,6 +46,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)menuViewResponse:(MenuViewController *)controller didSelectOption:(NSInteger)option{
+    NSLog(@"this cell was selected %@",controller.uberTypes[option]);
+    self.uberTypeLabel.text = controller.uberTypes[option];
+}
 /*
 #pragma mark - Navigation
 

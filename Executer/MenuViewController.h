@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MenuViewController : UIViewController
-
+//func menuViewResponse(controller: MenuViewController,
+//                      didDismissPopupView selectedCell: Int)
+@protocol menuViewDelegate <NSObject>
+-(void)menuViewResponse:(id)controller didSelectOption:(NSInteger)option;
+@end
+@interface MenuViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@property (strong, nonatomic) IBOutlet UITableView *menuTable;
+@property(weak, nonatomic) id<menuViewDelegate> delegate;
+@property(strong, nonatomic) NSMutableArray* uberTypes;
 @end
