@@ -32,8 +32,8 @@
     UIPopoverPresentationController * popController = menuViewController.popoverPresentationController;
     popController.permittedArrowDirections = UIPopoverArrowDirectionAny;
     popController.delegate = self;
-    popController.sourceView = self.view;
-    popController.sourceRect = CGRectMake(self.chooseUberType.layer.frame.origin.x+self.chooseUberType.layer.frame.size.width/2-(self.view.frame.size.height/4)/2,self.chooseUberType.layer.frame.origin.y+self.chooseUberType.layer.frame.size.height/2,1,1);
+    popController.sourceView = self.chooseUberType;
+    popController.sourceRect = CGRectMake(0,self.chooseUberType.layer.frame.size.height/2,1,1);
     [self presentViewController:menuViewController animated:YES completion:nil];
 }
 
