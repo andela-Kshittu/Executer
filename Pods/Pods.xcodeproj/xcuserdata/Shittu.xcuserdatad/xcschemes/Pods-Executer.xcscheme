@@ -14,7 +14,11 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+<<<<<<< HEAD
                BlueprintIdentifier = "5D70870F313F431A8B10C6B6F40C671F"
+=======
+               BlueprintIdentifier = "6A4C7FBBA9DADC52F485FBD9AD0EDDC5"
+>>>>>>> fixed linker error and redesigned book ride view
                BuildableName = "libPods-Executer.a"
                BlueprintName = "Pods-Executer"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -42,7 +46,11 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
+<<<<<<< HEAD
             BlueprintIdentifier = "5D70870F313F431A8B10C6B6F40C671F"
+=======
+            BlueprintIdentifier = "6A4C7FBBA9DADC52F485FBD9AD0EDDC5"
+>>>>>>> fixed linker error and redesigned book ride view
             BuildableName = "libPods-Executer.a"
             BlueprintName = "Pods-Executer"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,7 +68,11 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
+<<<<<<< HEAD
             BlueprintIdentifier = "5D70870F313F431A8B10C6B6F40C671F"
+=======
+            BlueprintIdentifier = "6A4C7FBBA9DADC52F485FBD9AD0EDDC5"
+>>>>>>> fixed linker error and redesigned book ride view
             BuildableName = "libPods-Executer.a"
             BlueprintName = "Pods-Executer"
             ReferencedContainer = "container:Pods.xcodeproj">
