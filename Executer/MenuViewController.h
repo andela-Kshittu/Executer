@@ -10,10 +10,11 @@
 //func menuViewResponse(controller: MenuViewController,
 //                      didDismissPopupView selectedCell: Int)
 @protocol menuViewDelegate <NSObject>
--(void)menuViewResponse:(id)controller didSelectOption:(NSInteger)option;
+-(void)menuViewResponse:(id)controller didSelectOptions:(NSMutableArray *)options;
 @end
 @interface MenuViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *menuTable;
 @property(weak, nonatomic) id<menuViewDelegate> delegate;
 @property(strong, nonatomic) NSMutableArray* uberTypes;
+@property(strong, nonatomic) NSMutableArray* selectedUberTypes;
 @end

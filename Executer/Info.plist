@@ -27,7 +27,7 @@
 			<string>com.kehesjay.Executer</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.kehesjay.Executer</string>
+				<string>ExecuterV2</string>
 			</array>
 		</dict>
 	</array>

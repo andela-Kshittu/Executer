@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "UberKit.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,63 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     return YES;
+}
+- (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    
+    if([[UberKit sharedInstance] handleLoginRedirectFromUrl:url sourceApplication:sourceApplication])
+    {
+        NSLog(@"redirect url query is %@", url.query);
+         NSLog(@"redirect url path is %@", url.path);
+        NSLog(@"redirect url is %@", url.relativeString);
+        [self getAuthTokenForCode:url.query];
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+- (void) getAuthTokenForCode: (NSString *) code
+{
+     NSLog(@"this is old code: %@",code);
+  NSRange range = NSMakeRange(0,5);
+  code = [code stringByReplacingCharactersInRange:range withString:@""];
+    NSLog(@"this is new code: %@",code);
+  NSString *clientID =@"rr2NzvHi69QJalUHz0ImU1KidoE1KGc5";
+  NSString *clientSecret = @"57am6kbYes-z2AP09g2IiQExJsZeracb0WIiu1Js";
+  NSString *redirectURL = @"ExecuterV2://uber/callback";
+    
+    NSString *data = [NSString stringWithFormat:@"code=%@&client_id=%@&client_secret=%@&redirect_uri=%@&grant_type=authorization_code", code, clientID, clientSecret, redirectURL];
+    NSString *url = [NSString stringWithFormat:@"https://login.uber.com/oauth/token"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *authData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if(!error)
+    {
+        NSError *jsonError = nil;
+        NSDictionary *authDictionary = [NSJSONSerialization JSONObjectWithData:authData options:0 error:&jsonError];
+        if(!jsonError)
+        {
+            NSString *accessToken = [authDictionary objectForKey:@"access_token"];
+            if(accessToken)
+            {
+                NSLog(@"this is access token %@", authDictionary);
+            }
+        }
+        else
+        {
+            NSLog(@"Error retrieving access token %@", jsonError);
+        }
+    }
+    else
+    {
+        NSLog(@"Error in sending request for access token %@", error);
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -41,7 +99,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
-}
+//-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+//}
 @end

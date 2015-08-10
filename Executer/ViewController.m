@@ -17,7 +17,131 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(login:)];
+    [self.loginWithUber addGestureRecognizer:tapAction];
+    [self callCientAuthenticationMethods];
 }
+
+
+- (void) callCientAuthenticationMethods
+{
+    UberKit *uberKit = [[UberKit alloc] initWithServerToken:@"WaxCkdTlaVFmB9Vf76q_buaTGqVad5ODrYX5S5h2"]; //Add your server token
+    //[[UberKit sharedInstance] setServerToken:@"YOUR_SERVER_TOKEN"]; //Alternate initialization
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:37.7833 longitude:-122.4167];
+    CLLocation *endLocation = [[CLLocation alloc] initWithLatitude:37.9 longitude:-122.43];
+    
+    [uberKit getProductsForLocation:location withCompletionHandler:^(NSArray *products, NSURLResponse *response, NSError *error)
+     {
+         if(!error)
+         {
+             UberProduct *product = [products objectAtIndex:0];
+             NSLog(@"Product name of first %@", product.product_description);
+         }
+         else
+         {
+             NSLog(@"Error %@", error);
+         }
+     }];
+    
+    [uberKit getTimeForProductArrivalWithLocation:location withCompletionHandler:^(NSArray *times, NSURLResponse *response, NSError *error)
+     {
+         if(!error)
+         {
+             UberTime *time = [times objectAtIndex:0];
+             NSLog(@"Time for first %f", time.estimate);
+         }
+         else
+         {
+             NSLog(@"Error %@", error);
+         }
+     }];
+    
+    [uberKit getPriceForTripWithStartLocation:location endLocation:endLocation  withCompletionHandler:^(NSArray *prices, NSURLResponse *response, NSError *error)
+     {
+         if(!error)
+         {
+             UberPrice *price = [prices objectAtIndex:0];
+             NSLog(@"Price for first %i", price.lowEstimate);
+         }
+         else
+         {
+             NSLog(@"Error %@", error);
+         }
+     }];
+    
+    [uberKit getPromotionForLocation:location endLocation:endLocation withCompletionHandler:^(UberPromotion *promotion, NSURLResponse *response, NSError *error)
+     {
+         if(!error)
+         {
+             NSLog(@"Promotion - %@", promotion.localized_value);
+         }
+         else
+         {
+             NSLog(@"Error %@", error);
+         }
+     }];
+}
+
+- (void)login:(UITapGestureRecognizer *)sender
+{
+
+    [[UberKit sharedInstance] setClientID:@"rr2NzvHi69QJalUHz0ImU1KidoE1KGc5"];
+    [[UberKit sharedInstance] setClientSecret:@"57am6kbYes-z2AP09g2IiQExJsZeracb0WIiu1Js"];
+    [[UberKit sharedInstance] setRedirectURL:@"ExecuterV2://uber/callback"];
+    [[UberKit sharedInstance] setApplicationName:@"andelahack"];
+    //UberKit *uberKit = [[UberKit alloc] initWithClientID:@"YOUR_CLIENTID" ClientSecret:@"YOUR_CLIENT_SECRET" RedirectURL:@"YOUR_REDIRECT_URI" ApplicationName:@"YOUR_APPLICATION_NAME"]; // Alternate initialization
+    UberKit *uberKit = [UberKit sharedInstance];
+    uberKit.delegate = self;
+    [uberKit startLogin];
+}
+
+- (void) uberKit:(UberKit *)uberKit didReceiveAccessToken:(NSString *)accessToken
+{
+    
+    NSLog(@"Received access token %@", accessToken);
+    if(accessToken)
+    {
+        [uberKit getUserActivityWithCompletionHandler:^(NSArray *activities, NSURLResponse *response, NSError *error)
+         {
+             if(!error)
+             {
+                 NSLog(@"User activity %@", activities);
+                 UberActivity *activity = [activities objectAtIndex:0];
+                 NSLog(@"Last trip distance %f", activity.distance);
+             }
+             else
+             {
+                 NSLog(@"Error %@", error);
+             }
+         }];
+        
+        [uberKit getUserProfileWithCompletionHandler:^(UberProfile *profile, NSURLResponse *response, NSError *error)
+         {
+             if(!error)
+             {
+                 NSLog(@"User's full name %@ %@", profile.first_name, profile.last_name);
+             }
+             else
+             {
+                 NSLog(@"Error %@", error);
+             }
+         }];
+    }
+    else
+    {
+        NSLog(@"No auth token, try again");
+    }
+}
+
+- (void) uberKit:(UberKit *)uberKit loginFailedWithError:(NSError *)error
+{
+    NSLog(@"Error in login %@", error);
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0630"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,11 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-<<<<<<< HEAD
-               BlueprintIdentifier = "5D70870F313F431A8B10C6B6F40C671F"
-=======
-               BlueprintIdentifier = "6A4C7FBBA9DADC52F485FBD9AD0EDDC5"
->>>>>>> fixed linker error and redesigned book ride view
+               BlueprintIdentifier = "C9955F3F26730EFF128E208F"
                BuildableName = "libPods-Executer.a"
                BlueprintName = "Pods-Executer"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -43,19 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-<<<<<<< HEAD
-            BlueprintIdentifier = "5D70870F313F431A8B10C6B6F40C671F"
-=======
-            BlueprintIdentifier = "6A4C7FBBA9DADC52F485FBD9AD0EDDC5"
->>>>>>> fixed linker error and redesigned book ride view
-            BuildableName = "libPods-Executer.a"
-            BlueprintName = "Pods-Executer"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -65,19 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-<<<<<<< HEAD
-            BlueprintIdentifier = "5D70870F313F431A8B10C6B6F40C671F"
-=======
-            BlueprintIdentifier = "6A4C7FBBA9DADC52F485FBD9AD0EDDC5"
->>>>>>> fixed linker error and redesigned book ride view
-            BuildableName = "libPods-Executer.a"
-            BlueprintName = "Pods-Executer"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

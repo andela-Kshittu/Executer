@@ -4,6 +4,7 @@
 target 'Executer' do
 pod 'googleplus-ios-sdk'
 pod 'AFNetworking'
+pod 'UberKit'
 end
 
 target 'ExecuterTests' do
