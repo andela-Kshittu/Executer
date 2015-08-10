@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
+#import "UberKit.h"
+@interface ViewController : UIViewController  <UberKitDelegate>
+@property (strong, nonatomic) IBOutlet UIView *loginWithUber;
 
 
 @end

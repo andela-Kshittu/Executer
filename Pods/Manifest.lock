@@ -21,13 +21,16 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - googleplus-ios-sdk (1.7.1)
+  - UberKit (0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - googleplus-ios-sdk
+  - UberKit
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   googleplus-ios-sdk: 065d9135061a5f84c07656a68ced48336408fe35
+  UberKit: 3c4767f8c2b317be450c3de48acbe6b632306004
 
-COCOAPODS: 0.38.1
+COCOAPODS: 0.36.0
