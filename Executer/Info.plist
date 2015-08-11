@@ -30,6 +30,16 @@
 				<string>ExecuterV2</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.kehesjay.Executer</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.kehesjay.Executer</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

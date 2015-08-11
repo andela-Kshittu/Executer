@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <AFNetworking.h>
 
 @interface ViewController ()
 
@@ -20,9 +21,20 @@
     UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(login:)];
     [self.loginWithUber addGestureRecognizer:tapAction];
     [self callCientAuthenticationMethods];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeAccesstoken:) name:@"tokenRecieved" object:nil];
 }
 
+-(void)exchangeAccesstoken:(NSNotification *)notification{
+    NSLog(@"exchange access token called %@",notification.userInfo[@"accessToken"]);
+    [self sendAccessToken:notification.userInfo completion:^{
+    
+        NSLog(@"finished Auth process");
+        [self performSegueWithIdentifier:@"mainPage" sender:nil];
+        
+    }];
 
+}
 - (void) callCientAuthenticationMethods
 {
     UberKit *uberKit = [[UberKit alloc] initWithServerToken:@"WaxCkdTlaVFmB9Vf76q_buaTGqVad5ODrYX5S5h2"]; //Add your server token
@@ -94,6 +106,25 @@
     UberKit *uberKit = [UberKit sharedInstance];
     uberKit.delegate = self;
     [uberKit startLogin];
+}
+-(void)sendAccessToken:(NSDictionary *)data completion:(void (^)(void))completionBlock{
+    
+    NSLog(@"post %@", data);
+    
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+ 
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:@"https://andelahack.herokuapp.com/login" parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON from view controller:  %@", responseObject);
+        completionBlock();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error from view controller: %@", error);
+    }];
+    
+    
 }
 
 - (void) uberKit:(UberKit *)uberKit didReceiveAccessToken:(NSString *)accessToken

@@ -22,6 +22,13 @@ static NSString *const kClientSecret = @"Y4YbG7u_he6WGzKnCiUTsbtI";
 
 @implementation SyncCalendarViewController
 
++(BOOL)isGoogleAuth{
+    static BOOL _isGoogleAuth = nil;
+    if(!_isGoogleAuth){
+        _isGoogleAuth = YES;
+    }
+    return _isGoogleAuth;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -36,6 +43,8 @@ static NSString *const kClientSecret = @"Y4YbG7u_he6WGzKnCiUTsbtI";
 }
 
 -(void) syncCalendar:(UITapGestureRecognizer*)sender {
+//    self.isGoogleAuth = YES;
+//    isGoogleAuth
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     [signIn signOut];
     signIn.delegate = self;

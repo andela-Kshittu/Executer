@@ -22,6 +22,8 @@
     self.uberTypes =[[NSMutableArray alloc] initWithArray:@[@"UberX",@"UberXL",@"UberPlus/Select",@"UberPOOL",@"UberBLACK"]];
     self.selectedUberTypes =[[NSMutableArray alloc] init];
     // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

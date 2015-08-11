@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UberKit.h"
+#import "SyncCalendarViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,8 +23,10 @@
 }
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+//    SyncCalendarViewController *controller = [[SyncCalendarViewController alloc]init];
+    NSLog(@"is google :%d",[SyncCalendarViewController isGoogleAuth]);
     
-    if([[UberKit sharedInstance] handleLoginRedirectFromUrl:url sourceApplication:sourceApplication])
+    if([[UberKit sharedInstance] handleLoginRedirectFromUrl:url sourceApplication:sourceApplication] && [SyncCalendarViewController isGoogleAuth])
     {
         NSLog(@"redirect url query is %@", url.query);
          NSLog(@"redirect url path is %@", url.path);
@@ -33,7 +36,7 @@
     }
     else
     {
-        return NO;
+        return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
     }
 }
 - (void) getAuthTokenForCode: (NSString *) code
@@ -65,6 +68,7 @@
             if(accessToken)
             {
                 NSLog(@"this is access token %@", authDictionary);
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"tokenRecieved" object:nil userInfo:@{@"access_token":accessToken}];
             }
         }
         else

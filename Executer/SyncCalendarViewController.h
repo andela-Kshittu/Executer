@@ -11,6 +11,6 @@
 @interface SyncCalendarViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *syncCalendarView;
-    
-
+@property (assign,nonatomic) BOOL isGoogleAuth;
++(BOOL)isGoogleAuth;
 @end
