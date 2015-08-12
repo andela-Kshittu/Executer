@@ -17,14 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.loginWithUber.layer.cornerRadius = 5;
     // Do any additional setup after loading the view, typically from a nib.
     UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(login:)];
     [self.loginWithUber addGestureRecognizer:tapAction];
-    [self callCientAuthenticationMethods];
+//    [self callCientAuthenticationMethods];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeAccesstoken:) name:@"tokenRecieved" object:nil];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = YES;
+}
 -(void)exchangeAccesstoken:(NSNotification *)notification{
     NSLog(@"exchange access token called %@",notification.userInfo[@"accessToken"]);
     [self sendAccessToken:notification.userInfo completion:^{

@@ -20,8 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.bookRide.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
     UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showUberTypes:)];
+    UITapGestureRecognizer *bookTapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bookRide:)];
     [self.chooseUberType addGestureRecognizer:tapAction];
     self.chooseUberType.layer.borderWidth = 1.0;
     self.chooseUberType.layer.borderColor = [UIColor blackColor].CGColor;
@@ -40,6 +42,19 @@
     self.destinationTextField.delegate = self;
     self.startTimeTextField.delegate = self;
     self.endTimeTextField.delegate = self;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:43.0/255 green:180.0/255 blue:192.0/255 alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+                                    [UIColor whiteColor],NSBackgroundColorAttributeName,
+                                    [UIFont fontWithName:@"System" size:20.0], NSFontAttributeName,
+                                    nil];
+    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+    self.navigationItem.titleView.tintColor = [UIColor whiteColor];
 }
 -(void)showUberTypes:(UITapGestureRecognizer *)sender{
     NSLog(@"show uber types");
@@ -65,7 +80,18 @@
 
 -(void)menuViewResponse:(MenuViewController *)controller didSelectOptions:(NSMutableArray*)options{
     NSLog(@"this cells were selected %@",options);
-    self.uberTypeLabel.text = options[0];
+    NSString *labelText = @"";
+    int i = 0;
+    for (NSString *text in options){
+        NSString *formatedText = text;
+        if(i > 0){
+            formatedText = [NSString stringWithFormat:@" -> %@",formatedText];
+        }
+      labelText =   [labelText stringByAppendingString:formatedText];
+        i++;
+    }
+    self.selectedUberTypesLabel.text = [labelText  isEqual: @""] ? @"None":labelText;
+    self.selectedUberTypesView.hidden = NO;
 }
 
 

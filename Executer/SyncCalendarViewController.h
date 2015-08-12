@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SyncCalendarViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *shareRide;
 
 @property (weak, nonatomic) IBOutlet UIView *syncCalendarView;
 +(BOOL)isGoogleAuth;

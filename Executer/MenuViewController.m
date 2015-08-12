@@ -90,4 +90,15 @@
 }
 */
 
+- (IBAction)saveUberTypes:(id)sender {
+    NSMutableArray *selectionStrings = [[NSMutableArray alloc]init];
+    for (NSNumber *num in self.selectedUberTypes){
+        NSLog(@"integer:%ld  number:%@",[num integerValue],num);
+        NSString *data =[self.uberTypes objectAtIndex:[num integerValue]];
+        [selectionStrings addObject:data];
+        
+    }
+             [self.delegate menuViewResponse:self didSelectOptions:selectionStrings];
+             [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

@@ -23,7 +23,6 @@ static BOOL _isGoogleAuth = nil;
 @implementation SyncCalendarViewController
 
 +(BOOL)isGoogleAuth{
-    
     if(_isGoogleAuth == nil){
         _isGoogleAuth = NO;
     }
@@ -31,12 +30,19 @@ static BOOL _isGoogleAuth = nil;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.shareRide.layer.cornerRadius = 5;
+    self.syncCalendarView.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
     self.tap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(syncCalendar:)];
+    UITapGestureRecognizer *shareRideTap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(shareRide:)];
+    
     [self.syncCalendarView addGestureRecognizer:self.tap];
-
+    [self.shareRide addGestureRecognizer:shareRideTap];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -56,23 +62,42 @@ static BOOL _isGoogleAuth = nil;
     [signIn authenticate];
 }
 
+-(void) shareRide:(UITapGestureRecognizer*)sender {
+    [self performSegueWithIdentifier:@"ShareRide" sender:nil];
+
+}
 -(void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
     if (error) {
-        NSLog(@"%@", error);
+        NSLog(@" google auth error %@", error);
     } else {
-        NSLog(@"%@", auth);
-        NSString* serverCode = [GPPSignIn sharedInstance].homeServerAuthorizationCode;
-        NSLog(@"server code%@", serverCode);
-        AFHTTPRequestOperationManager* manager = [[AFHTTPRequestOperationManager alloc]init];
-        NSString* url = [NSString stringWithFormat:@"@andelahack.herokuapp.com/calendar/callback?code=%@", serverCode];
-        [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"%@", responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"%@", error);
+        NSLog(@"google auth response %@", auth);
+        NSLog(@"server code%@", auth.accessToken);
+        NSDictionary *dataDict = @{@"access_token":auth.accessToken};
+        [self getGoogleEvents:dataDict completion:^{
+            NSLog(@"Fetched google events");
         }];
+
     }
 }
-
+-(void)getGoogleEvents:(NSDictionary *)data completion:(void (^)(void))completionBlock{
+    
+    NSLog(@"post %@", data);
+    
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:@"https://andelahack.herokuapp.com/calendar" parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON from sync calendar:  %@", responseObject);
+        completionBlock();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error from sync calendar: %@", error);
+    }];
+    
+    
+}
 /*
 #pragma mark - Navigation
 
