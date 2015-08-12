@@ -32,14 +32,20 @@ static BOOL _isGoogleAuth = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSLog(@"user profile %@", self.uberProfile);
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.uberProfile[@"first_name"], self.uberProfile[@"last_name"]];
+    
+
+    
     self.tap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(syncCalendar:)];
     [self.syncCalendarView addGestureRecognizer:self.tap];
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidLayoutSubviews {
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
+    self.profileImageView.clipsToBounds = YES;
 }
 
 -(void) syncCalendar:(UITapGestureRecognizer*)sender {
