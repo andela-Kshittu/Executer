@@ -146,19 +146,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nsz-bI-86U">
-                                        <rect key="frame" x="177" y="427" width="246" height="69"/>
+                                        <rect key="frame" x="128.5" y="501.5" width="343" height="68.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypn-We-jBK">
-                                                <rect key="frame" x="-10" y="8" width="266" height="50"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypn-We-jBK">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="68.5"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="uber" translatesAutoresizingMaskIntoConstraints="NO" id="DxM-sU-38k">
-                                                        <rect key="frame" x="23" y="9" width="68" height="39"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uber" translatesAutoresizingMaskIntoConstraints="NO" id="DxM-sU-38k">
+                                                        <rect key="frame" x="95.5" y="8" width="52.5" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="DxM-sU-38k" secondAttribute="height" multiplier="1:1" id="PaT-cF-5Sn"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share Ride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2S-9R-hGl">
-                                                        <rect key="frame" x="127" y="14" width="131" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share Ride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2S-9R-hGl">
+                                                        <rect key="frame" x="150.5" y="0.0" width="72" height="68.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -192,19 +192,19 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ov4-Nv-Axc">
-                                        <rect key="frame" x="177" y="515" width="246" height="69"/>
+                                        <rect key="frame" x="128.5" y="582" width="343" height="69"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLd-tU-doq">
-                                                <rect key="frame" x="-10" y="8" width="266" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="69"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="uber" translatesAutoresizingMaskIntoConstraints="NO" id="Fvk-Cd-Ici">
-                                                        <rect key="frame" x="23" y="9" width="68" height="39"/>
+                                                        <rect key="frame" x="90.5" y="8" width="52.5" height="53"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Fvk-Cd-Ici" secondAttribute="height" multiplier="1:1" id="nvJ-TA-Kox"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sync Calendar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cI-Nt-iiW">
-                                                        <rect key="frame" x="127" y="14" width="131" height="21"/>
+                                                        <rect key="frame" x="143.5" y="0.0" width="96" height="69"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -237,44 +237,63 @@
                                             <constraint firstItem="wLd-tU-doq" firstAttribute="top" secondItem="Ov4-Nv-Axc" secondAttribute="top" id="rag-XX-aa3"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sync your calendar and " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4Q-OI-Nzb">
-                                        <rect key="frame" x="207" y="289" width="187" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sync your calendar and " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4Q-OI-Nzb">
+                                        <rect key="frame" x="207.5" y="408" width="186.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="schedule uber rides for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC5-3Y-PpU">
-                                        <rect key="frame" x="207" y="328" width="187" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="schedule uber rides for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC5-3Y-PpU">
+                                        <rect key="frame" x="212.5" y="430.5" width="176.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="your events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NfU-Hc-liW">
-                                        <rect key="frame" x="256" y="378" width="89" height="21"/>
+                                        <rect key="frame" x="256" y="453" width="89" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo_executor__1_" translatesAutoresizingMaskIntoConstraints="NO" id="ELz-vO-4Wo">
-                                        <rect key="frame" x="147" y="28" width="307" height="224"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_executor__1_" translatesAutoresizingMaskIntoConstraints="NO" id="ELz-vO-4Wo">
+                                        <rect key="frame" x="113" y="97" width="375" height="274"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ELz-vO-4Wo" secondAttribute="height" multiplier="307:224" id="9LM-Bq-xwT"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="HS1" translatesAutoresizingMaskIntoConstraints="NO" id="51Z-yX-cyz">
+                                        <rect key="frame" x="8" y="71" width="58" height="58"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="51Z-yX-cyz" secondAttribute="height" multiplier="1:1" id="Zf7-Z5-6dg"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAB-JG-gBP">
+                                        <rect key="frame" x="89" y="89" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16862745100000001" green="0.70588235290000001" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="NfU-Hc-liW" secondAttribute="centerX" id="1CN-06-mVr"/>
                                     <constraint firstAttribute="centerX" secondItem="nsz-bI-86U" secondAttribute="centerX" id="23Q-z2-ZiZ"/>
                                     <constraint firstAttribute="centerX" secondItem="cC5-3Y-PpU" secondAttribute="centerX" id="35j-eU-ExI"/>
+                                    <constraint firstItem="51Z-yX-cyz" firstAttribute="height" secondItem="ELz-vO-4Wo" secondAttribute="height" multiplier="0.45" id="3dh-Ux-nvt"/>
                                     <constraint firstItem="nsz-bI-86U" firstAttribute="top" secondItem="NfU-Hc-liW" secondAttribute="bottom" constant="28" id="4t3-FG-wwF"/>
+                                    <constraint firstItem="oAB-JG-gBP" firstAttribute="leading" secondItem="51Z-yX-cyz" secondAttribute="trailing" constant="15" id="8nJ-Da-8DT"/>
                                     <constraint firstItem="nsz-bI-86U" firstAttribute="width" secondItem="Ov4-Nv-Axc" secondAttribute="width" id="99B-XE-TiX"/>
                                     <constraint firstAttribute="width" secondItem="ELz-vO-4Wo" secondAttribute="width" multiplier="1.6" id="N3Y-BA-WpM"/>
                                     <constraint firstAttribute="centerY" secondItem="ELz-vO-4Wo" secondAttribute="centerY" constant="66" id="NPB-UO-c8J"/>
+                                    <constraint firstItem="oAB-JG-gBP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="51Z-yX-cyz" secondAttribute="trailing" constant="15" id="Nyt-HV-VHJ"/>
                                     <constraint firstItem="NfU-Hc-liW" firstAttribute="top" secondItem="cC5-3Y-PpU" secondAttribute="bottom" constant="2" id="TWw-lI-4Xk"/>
                                     <constraint firstItem="R4Q-OI-Nzb" firstAttribute="top" secondItem="ELz-vO-4Wo" secondAttribute="bottom" constant="37" id="XSr-UN-4NP"/>
                                     <constraint firstAttribute="centerX" secondItem="ELz-vO-4Wo" secondAttribute="centerX" id="bWr-bT-5Pe"/>
+                                    <constraint firstItem="ELz-vO-4Wo" firstAttribute="top" secondItem="51Z-yX-cyz" secondAttribute="bottom" constant="10" id="elX-pm-sgq"/>
+                                    <constraint firstAttribute="centerX" secondItem="51Z-yX-cyz" secondAttribute="centerX" constant="60" id="ezE-fz-pzk"/>
                                     <constraint firstItem="Ov4-Nv-Axc" firstAttribute="top" secondItem="nsz-bI-86U" secondAttribute="bottom" constant="12" id="gnp-ym-oXk"/>
+                                    <constraint firstAttribute="centerX" secondItem="oAB-JG-gBP" secondAttribute="centerX" constant="-35" id="keL-an-sIp"/>
+                                    <constraint firstItem="51Z-yX-cyz" firstAttribute="centerY" secondItem="oAB-JG-gBP" secondAttribute="centerY" constant="0.5" id="oXJ-06-gDd"/>
                                     <constraint firstAttribute="centerX" secondItem="Ov4-Nv-Axc" secondAttribute="centerX" id="s79-og-bhn"/>
                                     <constraint firstAttribute="centerX" secondItem="R4Q-OI-Nzb" secondAttribute="centerX" id="svj-aA-xsQ"/>
                                     <constraint firstItem="nsz-bI-86U" firstAttribute="width" secondItem="ELz-vO-4Wo" secondAttribute="width" constant="-32" id="xKN-IR-0vE"/>
@@ -282,6 +301,12 @@
                                     <constraint firstItem="nsz-bI-86U" firstAttribute="height" secondItem="Ov4-Nv-Axc" secondAttribute="height" id="ydr-I6-27j"/>
                                     <constraint firstItem="ELz-vO-4Wo" firstAttribute="height" secondItem="nsz-bI-86U" secondAttribute="height" multiplier="4" id="zvn-w9-ytf"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Nyt-HV-VHJ"/>
+                                        <exclude reference="keL-an-sIp"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -293,6 +318,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nameLabel" destination="oAB-JG-gBP" id="M1z-Zm-QSp"/>
+                        <outlet property="profileImageView" destination="51Z-yX-cyz" id="weS-mF-CzD"/>
                         <outlet property="shareRide" destination="nsz-bI-86U" id="Arm-bG-7GI"/>
                         <outlet property="syncCalendarView" destination="Ov4-Nv-Axc" id="6iO-Cg-7cj"/>
                         <segue destination="x4y-Zk-ji3" kind="show" identifier="EventsList" id="2Q6-O1-eAo"/>
@@ -791,6 +818,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="HS1" width="416" height="520"/>
         <image name="down4-25" width="50" height="50"/>
         <image name="logo" width="146" height="125"/>
         <image name="logo_executor__1_" width="281" height="195"/>

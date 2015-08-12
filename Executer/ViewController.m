@@ -7,9 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "SyncCalendarViewController.h"
 #import <AFNetworking.h>
 
 @interface ViewController ()
+
+@property(nonatomic,strong)NSDictionary* uberProfile;
 
 @end
 
@@ -19,6 +22,7 @@
     [super viewDidLoad];
     self.loginWithUber.layer.cornerRadius = 5;
     // Do any additional setup after loading the view, typically from a nib.
+    self.uberProfile = [[NSDictionary alloc]init];
     UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(login:)];
     [self.loginWithUber addGestureRecognizer:tapAction];
 //    [self callCientAuthenticationMethods];
@@ -34,11 +38,24 @@
     [self sendAccessToken:notification.userInfo completion:^{
     
         NSLog(@"finished Auth process");
-        [self performSegueWithIdentifier:@"mainPage" sender:nil];
+        [self performSegueWithIdentifier:@"mainPage" sender:self.uberProfile];
         
     }];
 
 }
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier  isEqual: @"mainPage"]) {
+        SyncCalendarViewController* controller = segue.destinationViewController;
+        controller.uberProfile = sender;
+        NSLog(@"sender %@", sender);
+        NSLog(@"controller %@", controller.uberProfile);
+    }
+}
+
+
+
 - (void) callCientAuthenticationMethods
 {
     UberKit *uberKit = [[UberKit alloc] initWithServerToken:@"WaxCkdTlaVFmB9Vf76q_buaTGqVad5ODrYX5S5h2"]; //Add your server token
@@ -123,6 +140,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:@"https://andelahack.herokuapp.com/login" parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON from view controller:  %@", responseObject);
+        self.uberProfile = responseObject[@"response"];
         completionBlock();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error from view controller: %@", error);

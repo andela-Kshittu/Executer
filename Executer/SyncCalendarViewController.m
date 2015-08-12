@@ -33,6 +33,20 @@ static BOOL _isGoogleAuth = nil;
     self.shareRide.layer.cornerRadius = 5;
     self.syncCalendarView.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
+    
+    NSLog(@"user profile %@", self.uberProfile);
+    self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.uberProfile[@"first_name"], self.uberProfile[@"last_name"]];
+    NSString* imgURL = self.uberProfile[@"picture"];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_async(queue, ^{
+        NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgURL]];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+            self.profileImageView.image = [UIImage imageWithData:imageData];
+        });
+    });
+    
     self.tap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(syncCalendar:)];
     UITapGestureRecognizer *shareRideTap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(shareRide:)];
     
@@ -46,6 +60,10 @@ static BOOL _isGoogleAuth = nil;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)viewDidLayoutSubviews {
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
+    self.profileImageView.clipsToBounds = YES;
 }
 
 -(void) syncCalendar:(UITapGestureRecognizer*)sender {

@@ -11,6 +11,11 @@
 @interface SyncCalendarViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *shareRide;
 
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
+
+@property(strong, nonatomic)  NSDictionary* uberProfile;
 @property (weak, nonatomic) IBOutlet UIView *syncCalendarView;
 +(BOOL)isGoogleAuth;
 @end
