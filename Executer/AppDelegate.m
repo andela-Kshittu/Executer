@@ -26,7 +26,7 @@
 //    SyncCalendarViewController *controller = [[SyncCalendarViewController alloc]init];
     NSLog(@"is google :%d",[SyncCalendarViewController isGoogleAuth]);
     
-    if([[UberKit sharedInstance] handleLoginRedirectFromUrl:url sourceApplication:sourceApplication] && [SyncCalendarViewController isGoogleAuth])
+    if([[UberKit sharedInstance] handleLoginRedirectFromUrl:url sourceApplication:sourceApplication] && ![SyncCalendarViewController isGoogleAuth])
     {
         NSLog(@"redirect url query is %@", url.query);
          NSLog(@"redirect url path is %@", url.path);
