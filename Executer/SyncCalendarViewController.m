@@ -35,8 +35,16 @@ static BOOL _isGoogleAuth = nil;
     
     NSLog(@"user profile %@", self.uberProfile);
     self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.uberProfile[@"first_name"], self.uberProfile[@"last_name"]];
+    NSString* imgURL = self.uberProfile[@"picture"];
     
-
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_async(queue, ^{
+        NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgURL]];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+            self.profileImageView.image = [UIImage imageWithData:imageData];
+        });
+    });
     
     self.tap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(syncCalendar:)];
     [self.syncCalendarView addGestureRecognizer:self.tap];
