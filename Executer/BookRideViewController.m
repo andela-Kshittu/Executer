@@ -14,6 +14,7 @@
     CGRect executerLogoOldPosition;
     CGRect executerLogoNewPosition;
 }
+@property (strong, nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation BookRideViewController
@@ -40,7 +41,53 @@
     self.destinationTextField.delegate = self;
     self.startTimeTextField.delegate = self;
     self.endTimeTextField.delegate = self;
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 }
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            [self.locationManager requestWhenInUseAuthorization];
+            break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            [self.locationManager startUpdatingLocation];
+            break;
+        case kCLAuthorizationStatusDenied:
+            [self.locationManager stopUpdatingLocation];
+            break;
+        case kCLAuthorizationStatusRestricted:
+            [self.locationManager stopUpdatingLocation];
+            NSLog(@"The user device has been restricted by their provider");
+            break;
+        default:
+            break;
+    }
+    
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [self.locationManager stopUpdatingLocation];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:manager.location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        if (placemarks.count > 0) {
+            CLPlacemark *placemark = placemarks.firstObject;
+            NSArray *address = placemark.addressDictionary[@"FormattedAddressLines"];
+            NSString *addressString = @"";
+            for (NSString *name in address) {
+                addressString = [addressString stringByAppendingString: [NSString stringWithFormat:@"%@, ", name]];
+            }
+            addressString = [addressString substringToIndex:[addressString length] - 2];
+            self.locationTextField.text = addressString;
+        }
+    }];
+}
+
 -(void)showUberTypes:(UITapGestureRecognizer *)sender{
     NSLog(@"show uber types");
     MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
