@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MenuViewController.h"
-@interface BookRideViewController : UIViewController <UIPopoverPresentationControllerDelegate, menuViewDelegate, UITextFieldDelegate>
+#import <CoreLocation/CoreLocation.h>
+@interface BookRideViewController : UIViewController <UIPopoverPresentationControllerDelegate, menuViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate>
 @property (nonatomic, strong) UIPopoverPresentationController *popController;
 @property (strong, nonatomic) IBOutlet UIView *chooseUberType;
 @property (strong, nonatomic) IBOutlet UILabel *uberTypeLabel;
@@ -21,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIView *labelContainer;
 @property (strong, nonatomic) IBOutlet UIView *selectedUberTypesView;
 @property (strong, nonatomic) IBOutlet UIView *bookRide;
+@property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
 @property (strong, nonatomic) IBOutlet UILabel *selectedUberTypesLabel;
 @end

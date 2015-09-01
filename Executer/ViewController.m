@@ -34,6 +34,7 @@
     self.navigationController.navigationBarHidden = YES;
 }
 -(void)exchangeAccesstoken:(NSNotification *)notification{
+    self.activityIndicatorView.hidden = YES;
     NSLog(@"exchange access token called %@",notification.userInfo[@"accessToken"]);
     [self sendAccessToken:notification.userInfo completion:^{
     
@@ -118,7 +119,9 @@
 
 - (void)login:(UITapGestureRecognizer *)sender
 {
-
+    self.loginWithUber.hidden = YES;
+    self.activityIndicatorView.hidden = NO;
+    
     [[UberKit sharedInstance] setClientID:@"rr2NzvHi69QJalUHz0ImU1KidoE1KGc5"];
     [[UberKit sharedInstance] setClientSecret:@"57am6kbYes-z2AP09g2IiQExJsZeracb0WIiu1Js"];
     [[UberKit sharedInstance] setRedirectURL:@"ExecuterV2://uber/callback"];
@@ -144,6 +147,8 @@
         completionBlock();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error from view controller: %@", error);
+        self.loginWithUber.hidden = NO;
+        self.activityIndicatorView.hidden = YES;
     }];
     
     

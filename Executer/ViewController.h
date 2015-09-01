@@ -10,6 +10,7 @@
 #import "UberKit.h"
 @interface ViewController : UIViewController  <UberKitDelegate>
 @property (strong, nonatomic) IBOutlet UIView *loginWithUber;
+@property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
 
 
 @end
