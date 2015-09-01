@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.activityIndicator startAnimating];
     self.loginWithUber.layer.cornerRadius = 5;
     // Do any additional setup after loading the view, typically from a nib.
     self.uberProfile = [[NSDictionary alloc]init];
@@ -34,12 +35,12 @@
     self.navigationController.navigationBarHidden = YES;
 }
 -(void)exchangeAccesstoken:(NSNotification *)notification{
-    self.activityIndicatorView.hidden = YES;
     NSLog(@"exchange access token called %@",notification.userInfo[@"accessToken"]);
     [self sendAccessToken:notification.userInfo completion:^{
     
         NSLog(@"finished Auth process");
         [self performSegueWithIdentifier:@"mainPage" sender:self.uberProfile];
+        self.activityIndicatorView.hidden = YES;
         
     }];
 

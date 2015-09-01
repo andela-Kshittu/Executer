@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController  <UberKitDelegate>
 @property (strong, nonatomic) IBOutlet UIView *loginWithUber;
 @property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 @end

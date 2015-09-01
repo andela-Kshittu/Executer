@@ -179,6 +179,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="M6B-LY-yn2"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="iKn-Ht-Ssb" id="TwV-kc-3G9"/>
                         <outlet property="activityIndicatorView" destination="9Qc-ak-ump" id="9u0-kC-Tnw"/>
                         <outlet property="loginWithUber" destination="6ej-7G-Dtm" id="dOw-US-6aF"/>
                         <segue destination="GbL-rb-2UD" kind="show" identifier="mainPage" id="OMj-Gf-kB8"/>
@@ -821,6 +822,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="EXECUTER" id="Qnk-HZ-keE"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="CcF-WX-rzy" id="gGZ-GU-UaN"/>
                         <outlet property="activityIndicatorView" destination="vOs-w5-mlH" id="T46-7Z-iNj"/>
                         <outlet property="bookRide" destination="FX9-tx-jSL" id="jMN-JX-Hr7"/>
                         <outlet property="chooseUberType" destination="gce-z0-bzU" id="c3L-Uc-lr9"/>
