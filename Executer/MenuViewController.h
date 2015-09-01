@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *menuTable;
 @property(weak, nonatomic) id<menuViewDelegate> delegate;
 @property(strong, nonatomic) NSMutableArray* uberTypes;
+- (IBAction)saveUberTypes:(id)sender;
 @property(strong, nonatomic) NSMutableArray* selectedUberTypes;
 @end

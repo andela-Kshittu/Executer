@@ -20,4 +20,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *locationTextField;
 @property (strong, nonatomic) IBOutlet UIView *pageHeader;
 @property (strong, nonatomic) IBOutlet UIView *labelContainer;
+@property (strong, nonatomic) IBOutlet UIView *selectedUberTypesView;
+@property (strong, nonatomic) IBOutlet UIView *bookRide;
+@property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
+@property (strong, nonatomic) IBOutlet UILabel *selectedUberTypesLabel;
 @end

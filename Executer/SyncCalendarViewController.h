@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SyncCalendarViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *shareRide;
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
