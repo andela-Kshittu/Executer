@@ -25,4 +25,5 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIView *activityIndicatorView;
 @property (strong, nonatomic) IBOutlet UILabel *selectedUberTypesLabel;
+@property(strong, nonatomic) NSDictionary* event;
 @end

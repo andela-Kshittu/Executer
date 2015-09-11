@@ -18,6 +18,9 @@
 		42C0E44D1B73861800149FD0 /* ExecuterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0E44C1B73861800149FD0 /* ExecuterTests.m */; };
 		5022F63A626D924D3EEC232A /* libPods-Executer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A012A922CBAE8D8045E54D0D /* libPods-Executer.a */; };
 		85C93B0B1B73AFEB00679EB9 /* SyncCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C93B0A1B73AFEB00679EB9 /* SyncCalendarViewController.m */; };
+		A5EB78681BA1FFAB0054716E /* CalendarEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78671BA1FFAB0054716E /* CalendarEventsViewController.m */; };
+		A5EB786B1BA2873E0054716E /* RecentBookedDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EB786A1BA2873E0054716E /* RecentBookedDetailsViewController.m */; };
+		A5EB78E81BA299980054716E /* GooglePlusOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78E71BA299980054716E /* GooglePlusOverride.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,12 @@
 		85C93B091B73AFEB00679EB9 /* SyncCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncCalendarViewController.h; sourceTree = "<group>"; };
 		85C93B0A1B73AFEB00679EB9 /* SyncCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncCalendarViewController.m; sourceTree = "<group>"; };
 		A012A922CBAE8D8045E54D0D /* libPods-Executer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Executer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5EB78661BA1FFAB0054716E /* CalendarEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarEventsViewController.h; sourceTree = "<group>"; };
+		A5EB78671BA1FFAB0054716E /* CalendarEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarEventsViewController.m; sourceTree = "<group>"; };
+		A5EB78691BA2873E0054716E /* RecentBookedDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentBookedDetailsViewController.h; sourceTree = "<group>"; };
+		A5EB786A1BA2873E0054716E /* RecentBookedDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentBookedDetailsViewController.m; sourceTree = "<group>"; };
+		A5EB78E61BA299980054716E /* GooglePlusOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlusOverride.h; sourceTree = "<group>"; };
+		A5EB78E71BA299980054716E /* GooglePlusOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlusOverride.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +128,12 @@
 				420142BF1B74B7E1004CC0CF /* BookRideViewController.m */,
 				420142C11B74BDB1004CC0CF /* MenuViewController.h */,
 				420142C21B74BDB1004CC0CF /* MenuViewController.m */,
+				A5EB78661BA1FFAB0054716E /* CalendarEventsViewController.h */,
+				A5EB78671BA1FFAB0054716E /* CalendarEventsViewController.m */,
+				A5EB78691BA2873E0054716E /* RecentBookedDetailsViewController.h */,
+				A5EB786A1BA2873E0054716E /* RecentBookedDetailsViewController.m */,
+				A5EB78E61BA299980054716E /* GooglePlusOverride.h */,
+				A5EB78E71BA299980054716E /* GooglePlusOverride.m */,
 			);
 			path = Executer;
 			sourceTree = "<group>";
@@ -294,12 +309,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5EB786B1BA2873E0054716E /* RecentBookedDetailsViewController.m in Sources */,
+				A5EB78681BA1FFAB0054716E /* CalendarEventsViewController.m in Sources */,
 				420142C01B74B7E1004CC0CF /* BookRideViewController.m in Sources */,
 				420142C31B74BDB1004CC0CF /* MenuViewController.m in Sources */,
 				42C0E4391B73861700149FD0 /* ViewController.m in Sources */,
 				85C93B0B1B73AFEB00679EB9 /* SyncCalendarViewController.m in Sources */,
 				42C0E4361B73861700149FD0 /* AppDelegate.m in Sources */,
 				42C0E4331B73861700149FD0 /* main.m in Sources */,
+				A5EB78E81BA299980054716E /* GooglePlusOverride.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,9 +448,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Executer/googleplus-ios-sdk/google-plus-ios-sdk-1.7.1",
+				);
 				INFOPLIST_FILE = Executer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Executer/Google/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleAnalytics/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleAppUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleAuthUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleNetworkingUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleSignIn/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleSymbolUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleUtilities/Libraries",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -445,9 +478,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Executer/googleplus-ios-sdk/google-plus-ios-sdk-1.7.1",
+				);
 				INFOPLIST_FILE = Executer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Executer/Google/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleAnalytics/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleAppUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleAuthUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleNetworkingUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleSignIn/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleSymbolUtilities/Libraries",
+					"$(PROJECT_DIR)/Executer/GoogleUtilities/Libraries",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

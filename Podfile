@@ -4,6 +4,7 @@
 target 'Executer' do
 pod 'googleplus-ios-sdk'
 pod 'AFNetworking'
+pod 'Google/SignIn'
 pod 'UberKit'
 end
 

@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleSignIn.h>
 
 @interface SyncCalendarViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *shareRide;
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (strong, nonatomic) IBOutlet UIView *shareRideInnerView;
 
 
 @property(strong, nonatomic)  NSDictionary* uberProfile;

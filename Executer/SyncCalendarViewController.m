@@ -10,14 +10,15 @@
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <GooglePlus/GooglePlus.h>
 #import <AFNetworking.h>
+#import "CalendarEventsViewController.h"
 
-@interface SyncCalendarViewController ()<GPPSignInDelegate>
+@interface SyncCalendarViewController ()<GPPSignInDelegate, GIDSignInDelegate, GIDSignInUIDelegate>
 
 @property(strong, nonatomic)UITapGestureRecognizer* tap;
-
+@property(strong,  nonatomic)NSMutableArray* events;
 @end
 static NSString *const kServerClientID = @"453264479059-fc56k30fdhl07leahq5n489ct7ifk7md.apps.googleusercontent.com";
-static NSString *const kClientID = @"453264479059-4dd6ctv0nk3ji2fuadnmt54hu6b0aboj.apps.googleusercontent.com";
+static NSString *const kClientID = @"453264479059-emgeqatjuamrrq04e84kn7bk6rc9kckq.apps.googleusercontent.com";
 static NSString *const kClientSecret = @"Y4YbG7u_he6WGzKnCiUTsbtI";
 static BOOL _isGoogleAuth = nil;
 @implementation SyncCalendarViewController
@@ -30,10 +31,10 @@ static BOOL _isGoogleAuth = nil;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.shareRide.layer.cornerRadius = 5;
-    self.syncCalendarView.layer.cornerRadius = 5;
+
+    self.shareRideInnerView.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
-    
+    self.events = [[NSArray alloc]init];
     NSLog(@"user profile %@", self.uberProfile);
     self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.uberProfile[@"first_name"], self.uberProfile[@"last_name"]];
     NSString* imgURL = self.uberProfile[@"picture"];
@@ -57,11 +58,9 @@ static BOOL _isGoogleAuth = nil;
     [super viewWillAppear:YES];
     self.navigationController.navigationBarHidden = YES;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 -(void)viewDidLayoutSubviews {
+    self.shareRide.layer.cornerRadius = 5;
+    self.syncCalendarView.layer.cornerRadius = 5;
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
     self.profileImageView.clipsToBounds = YES;
 }
@@ -69,46 +68,46 @@ static BOOL _isGoogleAuth = nil;
 -(void) syncCalendar:(UITapGestureRecognizer*)sender {
     _isGoogleAuth = YES;
 //    isGoogleAuth
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    GIDSignIn *signIn = [GIDSignIn sharedInstance];
     [signIn signOut];
     signIn.delegate = self;
-    signIn.shouldFetchGooglePlusUser = YES;
+    signIn.uiDelegate = self;
+    signIn.shouldFetchBasicProfile = NO;
     signIn.clientID = kClientID;
-    signIn.homeServerClientID = kServerClientID;
+    signIn.serverClientID = kServerClientID;
     [signIn setScopes: [NSArray arrayWithObjects: @"https://www.googleapis.com/auth/calendar", @"https://www.googleapis.com/auth/calendar.readonly", nil]];
-    [signIn setAttemptSSO:NO];
-    [signIn authenticate];
+    [signIn setAllowsSignInWithBrowser:NO];
+    [signIn setAllowsSignInWithWebView:YES];
+    [signIn signIn];
+}
+
+-(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    if (!error) {
+        NSLog(@"google auth response %@", user);
+        NSLog(@"server code%@", user.authentication.accessToken);
+        NSDictionary *dataDict = @{@"access_token":user.authentication.accessToken};
+        [self getGoogleEvents:dataDict completion:^{
+            NSLog(@"Fetched google events");
+            [self performSegueWithIdentifier:@"EventsList" sender:self.events];
+        }];
+    }
 }
 
 -(void) shareRide:(UITapGestureRecognizer*)sender {
-    [self performSegueWithIdentifier:@"ShareRide" sender:nil];
+//    [self performSegueWithIdentifier:@"ShareRide" sender:nil];
 
 }
--(void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
-    if (error) {
-        NSLog(@" google auth error %@", error);
-    } else {
-        NSLog(@"google auth response %@", auth);
-        NSLog(@"server code%@", auth.accessToken);
-        NSDictionary *dataDict = @{@"access_token":auth.accessToken};
-        [self getGoogleEvents:dataDict completion:^{
-            NSLog(@"Fetched google events");
-        }];
 
-    }
-}
 -(void)getGoogleEvents:(NSDictionary *)data completion:(void (^)(void))completionBlock{
-    
+    NSString* url = [NSString stringWithFormat:@"https://andelahack.herokuapp.com/%@/calendar",self.uberProfile[@"uuid"]];
     NSLog(@"post %@", data);
-    
-    
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:@"https://andelahack.herokuapp.com/calendar" parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:url parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON from sync calendar:  %@", responseObject);
+        self.events = responseObject[@"response"];
         completionBlock();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error from sync calendar: %@", error);
@@ -116,14 +115,12 @@ static BOOL _isGoogleAuth = nil;
     
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"EventsList"]) {
+        CalendarEventsViewController* controller = segue.destinationViewController;
+        controller.calenderEvents = self.events;
+    }
 }
-*/
 
 @end

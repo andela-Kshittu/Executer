@@ -4,45 +4,35 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Executer-AFNetworking.xcscheme</key>
+		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Pods-Executer-UberKit.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>Pods-Executer-googleplus-ios-sdk.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Executer.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UberKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>02C62CBA8FD9414E3D81F773</key>
+		<key>18F4C7C0FDB7A2111ED74F0CBA02B339</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1AD4B099C115AE80AAA6BA6A</key>
+		<key>5E11D5991264A6E881442C7DBF5D50DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>51951D670596B809E90576D3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C9955F3F26730EFF128E208F</key>
+		<key>7CD6BF2D6377B3A52FFCF3F0A67D419F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
