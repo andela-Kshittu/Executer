@@ -120,6 +120,7 @@ static BOOL _isGoogleAuth = nil;
     if ([segue.identifier isEqualToString:@"EventsList"]) {
         CalendarEventsViewController* controller = segue.destinationViewController;
         controller.calenderEvents = self.events;
+        controller.uberProfile = self.uberProfile;
     }
 }
 

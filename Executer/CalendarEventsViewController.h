@@ -14,5 +14,7 @@
 @property(nonatomic, strong)NSMutableArray* calenderEvents;
 @property(nonatomic, strong)NSMutableArray* recentlyBookedEvents;
 - (IBAction)segmentControl:(UISegmentedControl *)sender;
+@property(strong, nonatomic)  NSDictionary* uberProfile;
+
 
 @end

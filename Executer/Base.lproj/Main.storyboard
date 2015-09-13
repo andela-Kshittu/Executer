@@ -1161,6 +1161,7 @@
                         <outlet property="selectedUberTypesLabel" destination="5Oe-s6-fr6" id="sIK-0w-rma"/>
                         <outlet property="selectedUberTypesView" destination="p76-iA-d0a" id="VyR-Gt-Kw4"/>
                         <outlet property="startTimeTextField" destination="Wez-57-EXI" id="ol4-TQ-RiZ"/>
+                        <outlet property="summaryLabel" destination="OOG-e1-r0b" id="1wB-3D-SSz"/>
                         <outlet property="uberTypeLabel" destination="1SR-oH-116" id="NDu-eE-Om5"/>
                     </connections>
                 </viewController>

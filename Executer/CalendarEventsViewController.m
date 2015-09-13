@@ -27,6 +27,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.displayedView = calenderEventsView;
+    self.navigationController.navigationBarHidden = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -73,6 +74,7 @@ typedef enum {
     if ([segue.identifier isEqualToString:@"BookRide"]) {
         BookRideViewController* controller = segue.destinationViewController;
         controller.event = sender;
+        controller.uberProfile = self.uberProfile;
     }else if ([segue.identifier isEqualToString:@"RecentlyBookedDetails"]){
         RecentBookedDetailsViewController* controller = segue.destinationViewController;
         controller.event = sender;

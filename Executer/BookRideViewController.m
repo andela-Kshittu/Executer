@@ -8,6 +8,8 @@
 
 #import "BookRideViewController.h"
 #import "MenuViewController.h"
+#import <AFNetworking.h>
+
 
 @interface BookRideViewController ()
 {
@@ -25,7 +27,13 @@
     self.bookRide.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
     UITapGestureRecognizer *tapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showUberTypes:)];
-    //UITapGestureRecognizer *bookTapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bookRide:)];
+    UITapGestureRecognizer *bookTapAction = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bookingRide:)];
+    [self.bookRide addGestureRecognizer:bookTapAction];
+    
+    self.startTimeTextField.text = self.event[@"start"];
+    self.destinationTextField.text = self.event[@"location"];
+    self.summaryLabel.text = self.event[@"summary"];
+    
     [self.chooseUberType addGestureRecognizer:tapAction];
     self.chooseUberType.layer.borderWidth = 1.0;
     self.chooseUberType.layer.borderColor = [UIColor blackColor].CGColor;
@@ -107,6 +115,36 @@
         }
         self.activityIndicatorView.hidden = YES;
     }];
+}
+
+-(void)bookingRide:(UITapGestureRecognizer*)sender{
+    NSLog(@"called");
+    NSDictionary *dataDict = @{@"startTime":self.startTimeTextField.text,
+                               @"location":@{
+                                       @"address":self.locationTextField.text
+                                       },
+                               @"productType":@"uberX",
+                               @"destination":self.destinationTextField.text
+                            };
+    [self bookRideApi:dataDict completion:^{
+        NSLog(@"done");
+    }];
+
+}
+
+-(void)bookRideApi:(NSDictionary*)dict completion:(void (^)(void))completionBlock {
+        NSString* url = [NSString stringWithFormat:@"https://andelahack.herokuapp.com/users/%@/requests",self.uberProfile[@"uuid"]];
+        NSLog(@"datadict %@", dict);
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON from sync calendar:  %@", responseObject);
+            completionBlock();
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error from sync calendar: %@", error);
+        }];
+    
 }
 
 -(void)showUberTypes:(UITapGestureRecognizer *)sender{
