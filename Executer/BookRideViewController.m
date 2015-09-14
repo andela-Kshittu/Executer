@@ -120,9 +120,7 @@
 -(void)bookingRide:(UITapGestureRecognizer*)sender{
     NSLog(@"called");
     NSDictionary *dataDict = @{@"startTime":self.startTimeTextField.text,
-                               @"location":@{
-                                       @"address":self.locationTextField.text
-                                       },
+                               @"location":self.locationTextField.text,
                                @"productType":@"uberX",
                                @"destination":self.destinationTextField.text
                             };
