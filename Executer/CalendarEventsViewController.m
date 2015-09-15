@@ -9,6 +9,7 @@
 #import "CalendarEventsViewController.h"
 #import "BookRideViewController.h"
 #import "RecentBookedDetailsViewController.h"
+#import <AFNetworking.h>
 
 typedef enum {
     none,
@@ -28,6 +29,10 @@ typedef enum {
     [super viewDidLoad];
     self.displayedView = calenderEventsView;
     self.navigationController.navigationBarHidden = NO;
+    self.tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+    [self getRecentlyBookedEvents:^{
+        
+    }];
     // Do any additional setup after loading the view.
 }
 
@@ -55,6 +60,7 @@ typedef enum {
         timeLabel.text = event[@"start"];
     }else {
         event = self.recentlyBookedEvents[indexPath.row];
+//        summaryLabel.text = event
     }
     return cell;
 }
@@ -79,6 +85,22 @@ typedef enum {
         RecentBookedDetailsViewController* controller = segue.destinationViewController;
         controller.event = sender;
     }
+}
+
+
+-(void)getRecentlyBookedEvents:(void (^)(void))completionBlock {
+    NSString* url = [NSString stringWithFormat:@"https://andelahack.herokuapp.com/users/%@/requests",self.uberProfile[@"uuid"]];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON from recently:  %@", responseObject);
+        self.recentlyBookedEvents = responseObject;
+        completionBlock();
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error from sync calendar: %@", error);
+    }];
+    
 }
 
 

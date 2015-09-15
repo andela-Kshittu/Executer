@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.activityIndicator startAnimating];
     self.bookRide.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
@@ -144,6 +145,7 @@
         }];
     
 }
+
 
 -(void)showUberTypes:(UITapGestureRecognizer *)sender{
     NSLog(@"show uber types");
