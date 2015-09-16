@@ -138,7 +138,27 @@
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON from sync calendar:  %@", responseObject);
+            
+            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+            localNotification.userInfo = @{@"message":@"Executer is about to schedule an uber ride for you"};
+            localNotification.soundName = UILocalNotificationDefaultSoundName;
+            localNotification.alertBody = [NSString stringWithFormat:@"We're about to schedule an %@ cab for your meeting at %@",responseObject[@"product"][@"type"],responseObject[@"destination"][@"address"]];
+           
+            NSDate *currDate = [NSDate date];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+            [dateFormatter setLocale:enUSPOSIXLocale];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+            NSDate *now = [NSDate date];
+            NSString *testDate = [dateFormatter stringFromDate:now];
+//            responseObject[@"estimates"][@"reminder"]
+            NSDate *fireDate = [dateFormatter dateFromString:testDate];
+            
+            localNotification.fireDate = [NSDate date];
+
             completionBlock();
+            
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error from sync calendar: %@", error);
         }];
