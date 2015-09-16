@@ -270,7 +270,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="HS1" translatesAutoresizingMaskIntoConstraints="NO" id="51Z-yX-cyz">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="51Z-yX-cyz">
                                         <rect key="frame" x="210" y="141" width="180" height="180"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="51Z-yX-cyz" secondAttribute="height" multiplier="1:1" id="Zf7-Z5-6dg"/>
@@ -1280,7 +1280,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="HS1" width="416" height="520"/>
+        <image name="defaultImage" width="300" height="300"/>
         <image name="down4-25" width="50" height="50"/>
         <image name="logo" width="146" height="125"/>
         <image name="logo_executor__1_" width="281" height="195"/>
