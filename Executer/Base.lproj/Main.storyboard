@@ -270,7 +270,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="51Z-yX-cyz">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="51Z-yX-cyz">
                                         <rect key="frame" x="210" y="141" width="180" height="180"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="51Z-yX-cyz" secondAttribute="height" multiplier="1:1" id="Zf7-Z5-6dg"/>
@@ -1259,6 +1259,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgY-fJ-gCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80" y="289"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ebn-9L-AaR">
+            <objects>
+                <viewController storyboardIdentifier="confirmationView" id="Pyo-JT-agt" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dv4-Zg-IYN"/>
+                        <viewControllerLayoutGuide type="bottom" id="4cO-ZC-NDg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HMG-Yi-Bx4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zu7-sM-1Iw">
+                                <rect key="frame" x="50" y="117" width="501" height="378"/>
+                                <color key="backgroundColor" red="0.16862745100000001" green="0.70588235290000001" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zu7-sM-1Iw" firstAttribute="top" secondItem="dv4-Zg-IYN" secondAttribute="bottom" constant="-16" id="G6C-Ls-9u8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zu7-sM-1Iw" secondAttribute="trailing" constant="-16" id="GkM-eA-rfp"/>
+                            <constraint firstItem="4cO-ZC-NDg" firstAttribute="top" secondItem="zu7-sM-1Iw" secondAttribute="bottom" id="R4Z-TF-pYo"/>
+                            <constraint firstItem="zu7-sM-1Iw" firstAttribute="leading" secondItem="HMG-Yi-Bx4" secondAttribute="leadingMargin" constant="-16" id="gEb-Uy-V0u"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Rz-kW-TsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="86" y="1017"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BhE-dC-PeZ">

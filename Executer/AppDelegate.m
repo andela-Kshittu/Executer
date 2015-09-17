@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "UberKit.h"
 #import "SyncCalendarViewController.h"
-
+#import <AFNetworking.h>
 @interface AppDelegate ()
 
 @end
@@ -19,8 +19,103 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    [[UIApplication sharedApplication]registerForRemoteNotifications ];
+    
+
+    
+//    NSDictionary *pushDic = [launchOptions objectForKey:@"UIApplicationLaunchOptionsLocalNotificationKey"];
+//    if (pushDic != nil) {
+//           NSLog(@" launched from Notification");
+//    }
+//    else {
+//        NSLog(@"not launched from Notification");
+//    }
+    // Handle launching from a notification
+    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (locationNotification) {
+        // Set icon badge number to zero
+           NSLog(@" launched from Notification");
+    [[NSUserDefaults standardUserDefaults] setObject:locationNotification.userInfo forKey:@"eventData"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                        message:locationNotification.alertBody
+                                                       delegate:self cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"OK", nil];
+        [alert show];
+       
+            UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+            UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"confirmationView"];
+            self.window.rootViewController = rootViewController;
+            [self.window makeKeyAndVisible];
+        
+        
+    }else{
+          NSLog(@"not launched from Notification");
+        
+    }
     return YES;
 }
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 0){
+        NSDictionary* data = [[NSUserDefaults standardUserDefaults] objectForKey:@"eventData"];
+        NSLog(@"firing reject with id %@",data);
+        
+       
+        
+        NSString* url = [NSString stringWithFormat:@"https://andelahack.herokuapp.com/users/%@/requests/%@",data[@"user_id"],data[@"request_id"]];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager DELETE:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"finished event booking cancellation %@", responseObject);
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error finihing event booking cancellation: %@", error);
+        }];
+        
+    }else{
+    NSDictionary* data = [[NSUserDefaults standardUserDefaults] objectForKey:@"eventID"];
+        NSLog(@"firing accept with id %@",data);
+        NSDictionary * dict = @{@"request_id":data[@"request_id"]};
+        
+        NSString* url = [NSString stringWithFormat:@"https://andelahack.herokuapp.com/trips/%@",data[@"user_id"]];
+  
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"finished event booking confirmation %@", responseObject);
+
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error finihing event booking confirmation: %@", error);
+        }];
+    }
+}
+
+- (void)application:(UIApplication*)application
+didReceiveLocalNotification:(UILocalNotification *)notification{
+//    notification.userInfo
+    NSLog(@"did receive local notification");
+     NSLog(@"user info object %@", notification.userInfo);
+    [[NSUserDefaults standardUserDefaults] setObject:notification.userInfo forKey:@"eventID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                    message:notification.alertBody
+                                                   delegate:self
+                                          cancelButtonTitle:@"CANCEL"
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    
+};
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
 //    SyncCalendarViewController *controller = [[SyncCalendarViewController alloc]init];

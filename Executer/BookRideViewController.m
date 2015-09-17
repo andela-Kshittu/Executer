@@ -138,13 +138,15 @@
         manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON from sync calendar:  %@", responseObject);
+            NSLog(@"JSON from sync calendar 5565656565656:  %@", responseObject);
             
             UILocalNotification *localNotification = [[UILocalNotification alloc] init];
             localNotification.userInfo = @{@"message":@"Executer is about to schedule an uber ride for you"};
             localNotification.soundName = UILocalNotificationDefaultSoundName;
-            localNotification.alertBody = [NSString stringWithFormat:@"We're about to schedule an %@ cab for your meeting at %@",responseObject[@"product"][@"type"],responseObject[@"destination"][@"address"]];
-           
+            localNotification.alertBody = [NSString stringWithFormat:@"We're about to schedule an %@ cab for your meeting at %@",responseObject[@"response"][@"product"][@"type"],responseObject[@"response"][@"destination"][@"address"]];
+            localNotification.userInfo = @{@"user_id":responseObject[@"response"][@"uid"],
+                                           @"request_id":responseObject[@"response"][@"id"]
+                                           };
             NSDate *currDate = [NSDate date];
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
@@ -152,10 +154,12 @@
             [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
             NSDate *now = [NSDate date];
             NSString *testDate = [dateFormatter stringFromDate:now];
-//            responseObject[@"estimates"][@"reminder"]
-            NSDate *fireDate = [dateFormatter dateFromString:testDate];
-            
-            localNotification.fireDate = [NSDate date];
+//            responseObject[@"response"][@"estimates"][@"reminder"]
+//            NSDate *fireDate = [dateFormatter dateFromString:testDate];
+            localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:10.0];
+//            localNotification.fireDate = fireDate;
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+           
 
             completionBlock();
             
