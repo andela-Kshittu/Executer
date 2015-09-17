@@ -16,7 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"RecentBookedDetailsViewController  %@", self.event);
     // Do any additional setup after loading the view.
+    self.summaryLabel.text = self.event[@"summary"];
+    self.startLabel.text = self.event[@"startTime"];
+    self.pickUpLocationLabel.text = self.event[@"location"][@"address"];
+    self.destinationLabel.text = self.event[@"destination"][@"address"];
+    self.endLabel.text = self.event[@"endTime"];
+    self.productLabel.text = self.event[@"product"][@"type"];
+    self.reminderLabel.text = self.event[@"estimates"][@"reminder"];
 }
 
 - (void)didReceiveMemoryWarning {

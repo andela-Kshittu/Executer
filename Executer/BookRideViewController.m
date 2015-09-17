@@ -15,6 +15,7 @@
 {
     CGRect executerLogoOldPosition;
     CGRect executerLogoNewPosition;
+
 }
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @end
@@ -23,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.bookRideActivityIndicator startAnimating];
     [self.activityIndicator startAnimating];
     self.bookRide.layer.cornerRadius = 5;
     // Do any additional setup after loading the view.
@@ -34,7 +35,7 @@
     self.startTimeTextField.text = self.event[@"start"];
     self.destinationTextField.text = self.event[@"location"];
     self.summaryLabel.text = self.event[@"summary"];
-    
+    self.endTimeTextField.text = self.event[@"end"];
     [self.chooseUberType addGestureRecognizer:tapAction];
     self.chooseUberType.layer.borderWidth = 1.0;
     self.chooseUberType.layer.borderColor = [UIColor blackColor].CGColor;
@@ -119,21 +120,31 @@
 }
 
 -(void)bookingRide:(UITapGestureRecognizer*)sender{
+    self.bookRide.hidden = YES;
+    self.bookRideActivityIndicatorView.hidden = NO;
     NSLog(@"called");
     NSDictionary *dataDict = @{@"startTime":self.startTimeTextField.text,
                                @"location":self.locationTextField.text,
                                @"productType":@"uberX",
-                               @"destination":self.destinationTextField.text
+                               @"destination": @"314 herbert macaulay way, yaba, lagos",
+                               @"summary": self.summaryLabel.text,
+                               @"endTime": self.endTimeTextField.text
                             };
     [self bookRideApi:dataDict completion:^{
         NSLog(@"done");
+        [self performSegueWithIdentifier:@"unwindSegue" sender:self];
     }];
 
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
 }
 
 -(void)bookRideApi:(NSDictionary*)dict completion:(void (^)(void))completionBlock {
         NSString* url = [NSString stringWithFormat:@"https://andelahack.herokuapp.com/users/%@/requests",self.uberProfile[@"uuid"]];
         NSLog(@"datadict %@", dict);
+        NSLog(@"datadict url %@", url);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -142,6 +153,8 @@
             completionBlock();
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error from sync calendar: %@", error);
+            self.bookRide.hidden = NO;
+            self.bookRideActivityIndicatorView.hidden = YES;
         }];
     
 }
@@ -220,6 +233,7 @@ replacementString:(NSString *)string
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
+    
     executerLogoOldPosition = CGRectMake(self.view.layer.frame.origin.x , self.view.layer.frame.origin.y, self.view.layer.frame.size.width, self.view.layer.frame.size.height);
     executerLogoNewPosition = CGRectMake(self.view.layer.frame.origin.x , self.view.layer.frame.origin.y -self.executerLogo.layer.frame.size.height, self.view.layer.frame.size.width, self.view.layer.frame.size.height);
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
