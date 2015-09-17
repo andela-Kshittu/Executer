@@ -30,5 +30,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *selectedUberTypesLabel;
 @property(strong, nonatomic) NSDictionary* event;
 @property(strong, nonatomic)  NSDictionary* uberProfile;
+@property (weak, nonatomic) IBOutlet UIView *bookRideActivityIndicatorView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *bookRideActivityIndicator;
+
 
 @end

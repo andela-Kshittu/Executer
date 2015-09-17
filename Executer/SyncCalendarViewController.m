@@ -29,6 +29,7 @@ static BOOL _isGoogleAuth = nil;
     }
     return _isGoogleAuth;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -57,6 +58,10 @@ static BOOL _isGoogleAuth = nil;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.navigationController.navigationBarHidden = YES;
+    if (!self.activityIndicator.isAnimating) {
+        self.activityIndicatorView.hidden = YES;
+        self.syncCalendarView.hidden = NO;
+    }
 }
 -(void)viewDidLayoutSubviews {
     self.shareRide.layer.cornerRadius = 5;
@@ -66,6 +71,9 @@ static BOOL _isGoogleAuth = nil;
 }
 
 -(void) syncCalendar:(UITapGestureRecognizer*)sender {
+    self.activityIndicatorView.hidden = NO;
+    [self.activityIndicator startAnimating];
+    self.syncCalendarView.hidden = YES;
     _isGoogleAuth = YES;
 //    isGoogleAuth
     GIDSignIn *signIn = [GIDSignIn sharedInstance];
@@ -88,6 +96,8 @@ static BOOL _isGoogleAuth = nil;
         NSDictionary *dataDict = @{@"access_token":user.authentication.accessToken};
         [self getGoogleEvents:dataDict completion:^{
             NSLog(@"Fetched google events");
+            self.activityIndicatorView.hidden = YES;
+            [self.activityIndicator stopAnimating];
             [self performSegueWithIdentifier:@"EventsList" sender:self.events];
         }];
     }

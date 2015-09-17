@@ -29,11 +29,16 @@ typedef enum {
     [super viewDidLoad];
     self.displayedView = calenderEventsView;
     self.navigationController.navigationBarHidden = NO;
-    self.tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     [self getRecentlyBookedEvents:^{
         
     }];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)unwindSegue:(UIStoryboardSegue *)segue {
+    [self getRecentlyBookedEvents:^{
+        
+    }];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -60,7 +65,9 @@ typedef enum {
         timeLabel.text = event[@"start"];
     }else {
         event = self.recentlyBookedEvents[indexPath.row];
-//        summaryLabel.text = event
+        summaryLabel.text = event[@"summary"];
+        locationLabel.text = event[@"destination"][@"address"];
+        timeLabel.text = event[@"startTime"];
     }
     return cell;
 }
@@ -70,7 +77,7 @@ typedef enum {
     if (self.displayedView == calenderEventsView) {
         event = self.calenderEvents[indexPath.row];
         [self performSegueWithIdentifier:@"BookRide" sender:event];
-    }else {
+    }else if (self.displayedView == recentlyBookedView) {
         event = self.recentlyBookedEvents[indexPath.row];
         [self performSegueWithIdentifier:@"RecentlyBookedDetails" sender:event];
     }
@@ -82,7 +89,8 @@ typedef enum {
         controller.event = sender;
         controller.uberProfile = self.uberProfile;
     }else if ([segue.identifier isEqualToString:@"RecentlyBookedDetails"]){
-        RecentBookedDetailsViewController* controller = segue.destinationViewController;
+        UINavigationController* navController = segue.destinationViewController;
+        RecentBookedDetailsViewController* controller = (RecentBookedDetailsViewController*)navController.topViewController;
         controller.event = sender;
     }
 }
@@ -94,8 +102,8 @@ typedef enum {
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON from recently:  %@", responseObject);
-        self.recentlyBookedEvents = responseObject;
+        self.recentlyBookedEvents = responseObject[@"response"];
+        NSLog(@"JSON from recently:  %@", responseObject[@"response"]);
         completionBlock();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error from sync calendar: %@", error);
